@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
     public int lastAction;
     public int nowAction;
 
+    [Header("動畫控制器")]
+    public Animator animator;
 
     [Header("音效區域")]  //欄位連用在同一個屬性下，會使該屬性下的欄位緊密靠攏，可作為整理方法之一。
     public AudioClip soundJump;     //跳躍音效
@@ -47,7 +49,7 @@ public class Player : MonoBehaviour
     #endregion
 
 
-    //=====我是分隔線=====
+    //=====我是分隔線=====//
 
 
     #region Method zom 方法區域
@@ -59,7 +61,12 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Jump()
     {
-        print("1129550");
+        //布林值 jump = 輸入按鍵(按鍵代碼. 空白建的布林值)
+        bool jump = Input.GetKey(KeyCode.Space);
+
+        //動畫布林值設定(滑行開關 ,jump) 對照上方的暫訂代數 jump
+        animator.SetBool("跳躍開關", jump);
+
     }
 
     /// <summary>
@@ -68,7 +75,11 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Slide()
     {
-        print("123");
+        //布林值 key = 輸入按鍵(按鍵代碼. L Ctrl的布林值)
+        bool slide = Input.GetKey(KeyCode.LeftControl);
+        
+        //動畫布林值設定(滑行開關 ,key) 對照上方的暫訂代數 key
+        animator.SetBool("滑行開關", slide);
     }
 
     /// <summary>
@@ -78,6 +89,8 @@ public class Player : MonoBehaviour
     private void Hit()
     {
 
+
+
     }
 
     /// <summary>
@@ -86,6 +99,8 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Coin()
     {
+
+
 
     }
 
@@ -112,7 +127,7 @@ public class Player : MonoBehaviour
     #endregion
 
 
-    //=====我是分隔線=====
+    //=====我是分隔線=====//
 
 
     #region Event zom 事件區域
@@ -133,16 +148,25 @@ public class Player : MonoBehaviour
     //              跳躍、滑行、受傷、吃金幣、死亡
     private void Update()
     {
-        
 
+        Jump();
+        Slide();
+        Hit();
 
+        Coin();
 
+        DeadLine();
+        Dead();
 
     }
 
 
     //事件區域結束
     #endregion
+
+
+    //=====我是分隔線=====//
+
 
 
 
